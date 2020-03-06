@@ -1,139 +1,165 @@
-"""Controller."""
-
-
-# main.py: Controller
-# Autor(s): Pierre Abraham Mulamba
-# Date of creation (modification): 20180525 (20180525)
-
-# import os
-import datetime
+"""Driver for the LMIS."""
+# Author(s): Pierre Abraham Mulamba
+# Date of creation (modification): 20200224 (20200224)
+# print("Machine: {}".format(platform.machine()))
+# print("Node: {}".format(platform.node()))
+# print("Processor: {}".format(platform.processor()))
+# print("Uname: {}".format(platform.uname()))
+# print("Release: {}".format(platform.release()))
+# print("System: {}".format(platform.system()))
+# tmp_sub = random.choice(subscribers)
+# tmp_book = random.choice(books)
+# tmp_borrow = Borrow(tmp_sub, tmp_book, date.today())
+# borrowers.append(tmp_borrow)
+# borrowers.append(borrow1)
+# borrowers.append(borrow2)
+import time
 import random
-from employee import Employee, employee_sort
+from book import Book
+from borrow import Borrow
+from library import Library
 from subscriber import Subscriber
-from operator import attrgetter
 
 
 def main():
-    """Controller of the Library Management Inventory System."""
-    message = 'Library Management Inventory System'
+    """
+    The main controller for the LMIS.
+    Used to create instances of different classes
+    Used for integration testing and various implemented methods
 
-    # DATA STRUCTURE
-    numbers = [1, 1, 2, 1, 3, 4, 7, 8, 7, 9, 9]
-    li = [1, -3, 2, -6, 3, -4, -5]  # list
-    tup = (9, 8, 1, 2, 7, 3, 6, 4, 5)  # tuple
-    names = ['Bruce', 'Clark', 'Peter', 'Logan', 'Wade']
-    heros = ['Batman', 'Superman', 'Spiderman', 'Wolveringe', 'Deadpool']
-
-    first_names = ['John', 'Jane', 'Corey', 'Travis', 'Dave', 'Kurt', 'John']
-    last_names = ['Smith', 'Doe', 'Jenkins', 'Robinson', 'Davis', 'Stuart']
-    street_names = ['Antonio', 'Allard', 'Shevchenko', 'conde', 'Tomba']
-    cities_names = ['Laval', 'Montreal', 'Saskatoon', 'Ottawa', 'Toronto']
-    provinces_names = ['QC', 'ON', 'BC', 'AB', 'NB', 'PE', 'NS', 'MB', 'SK']
-    questions = ['name', 'quest', 'favorite color']
-    answers = ['lancelot', 'the holy grail', 'blue']
+    """
+    start_time = time.time()
+    print("IF YOU FAIL TO PLAN FOR FAILURES, YOU ARE PLANNING TO FAIL AS AN SQA.")
 
     try:
+        print("LIBRARY MANAGEMENT INVENTORY SYSTEM")
+        print("INTEGRATION TEST PROGRAM")
 
-        fin = open('test.txt')
-        fout = open('test_out.txt', 'w')
-
-        tmp = random.choices(names, k=10)
-        st = {name for name in tmp}  # set comprehension
-
-        dic = {hero: name for hero, name in zip(heros, names) if name != 'Peter'}
-        dic_qa = dict(sorted((answer, question)
-                             for question, answer in dict(zip(questions, answers)).items()))
-        # print("I am {Batman}. I am {Superman}. I am {Wolveringe}. I am {Blackpanther}".format(**dic))
-
-        s_dic = sorted((name, hero) for hero, name in dic.items())
-        final_dic = dict(s_dic)
-
-        s = {number for number in numbers}  # create a set
-        # Generator expression
-        gen = (number*number for number in numbers)
-
-        # SORTING
-        li.sort()
-        s_tup = sorted(tup)
-
-        e1 = Employee('Carl', 37, 70000)
-        e2 = Employee('Sarah', 29, 8000)
-        e3 = Employee('John', 43, 9000)
-        employees = [e1, e2, e3]
-        s_employees = sorted(employees, key=attrgetter('age_'))
-
+        print("\nCREATING AND DISPLAYING OF SUBSCRIBERS")
         sub1 = Subscriber('1839456', 'John', 'Doe', 23)
-        # sub1.print()
+        sub2 = Subscriber('1630236', 'Nicolas', 'Gagnon', 8)
+        sub3 = Subscriber('1269348', 'Martin', 'Tremblay', 18)
+        print(sub1.info())
+        print(sub2.info())
+        print(sub3.info())
 
-    except AttributeError as e:
-        print(e)
-    except IndexError as e:
-        print(e)
-    except IOError as e:
-        print(e)
-    except KeyError as e:
-        print("Missing {} key".format(e))
-    except NameError as e:
-        print(e)
-    except FileNotFoundError as e:
-        print(e)
-    except Exception:
-        print('Unknown Exception Thrown')
+        print("\nCREATING AND DISPLAYING OF BOOKS")
+        book7 = Book("HB514", "Bjh D++", 2010, 9, 3, 4)
+        book1 = Book("GA403", "Big C++", 2009, 8, 3, 3)
+        book2 = Book("QA203", "Calcul a plusieurs variables partie 1", 2011, 3, 2, 2)
+        book3 = Book("QA204", "Calcul a plusieurs variables partie 2", 2011, 3, 2, 2)
+        book4 = Book("AC409", "Le chateau d'Ortrante", 1764, 16, 1, 1)
+        book5 = Book("BD302", "Harry Potter et le prisionier d'Azkaban", 1999, 3, 1, 1)
+        book6 = Book("CE413", "Ibssz Qpuufs et le prisionier c'balbcbo", 2000, 4, 2, 2)
+        print(book1.info())
+        print(book2.info())
+        print(book3.info())
+        print(book4.info())
+        print(book5.info())
+        print(book6.info())
+        print(book7.info())
+
+        print("\nBORROWING A BOOK BY A SUBSCRIBER")
+        borrow1 = Borrow(sub1, book2, 2020)
+        borrow2 = Borrow(sub2, book1, 2020)
+        print(borrow1.info())
+        print(borrow2.info())
+
+        # / ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** * /
+        # / *BEGINNING OF TESTS * /
+        # / *Les modifications restantes sont a la fin de la fonction main. * /
+        # / ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** * /
+
+        print("\nADDING OF BOOKS AND SUBSCRIBERS TO THE LIBRARY")
+        subscribers = []
+        books = []
+        borrowers = []
+        lib = Library(subscribers, 0, books, 0, borrowers, 0)
+        lib.add_subscriber_to_library(sub1)
+        lib.add_subscriber_to_library(sub2)
+        lib.add_subscriber_to_library(sub3)
+        lib.add_subscriber_to_library(sub1)
+        lib.add_book_to_library(book1)
+        lib.add_book_to_library(book2)
+        lib.add_book_to_library(book3)
+        lib.add_book_to_library(book4)
+        lib.add_book_to_library(book5)
+        lib.add_book_to_library(book6)
+        lib.add_book_to_library(book7)
+        lib.add_book_to_library(book3)
+        lib.add_book_to_library(book1)
+
+        print("\nSEARCH BY TITLE...: Calcul")
+        title = "Calcul"
+        lib.search_book_title(title)
+
+        title = random.choice([book_obj.get_title for book_obj in lib.books])
+        print("\nSEARCH A RANDOM TITLE ...: {}".format(title))
+        # print(title)
+        lib.search_book_title(title)
+
+        print("\nSEARCH BY QUOTE...: AC409")
+
+        lib.search_book_quote("AC409")
+        lib.search_book_quote("BD302")
+        lib.search_book_quote("QA204")
+        lib.search_book_quote("QA203")
+        lib.search_book_quote("AC209")
+        quote = random.choice([book_obj.get_quote for book_obj in lib.books])
+        # print(quote)
+        print("\nSEARCH A RANDOM QUOTE...: {}".format(quote))
+        lib.search_book_quote(quote)
+
+        print("\nTESTS OF BORROWING")
+        lib.borrow_book_by_subscriber("1630236", "AC409", 2021)
+        lib.borrow_book_by_subscriber("1630236", "BD302", 2021)
+        lib.borrow_book_by_subscriber('1839456', "GA403", 2021)
+        lib.borrow_book_by_subscriber('1839456', "GA403", 2021)
+        lib.borrow_book_by_subscriber("1839456", "BD302", 2022)
+        lib.borrow_book_by_subscriber("1630236", "QA204", 2024)
+        lib.borrow_book_by_subscriber("1630236", "QA203", 2044)
+        lib.borrow_book_by_subscriber("1630236", "CE413", 2024)
+
+        print("\nSUBSCRIBER INFORMATION BEFORE RETURNING A BOOK")
+        lib.subscriber_info("1630236")
+
+        id_number = random.choice([sub_obj.get_id_number for sub_obj in lib.subscribers])
+        print("\nRANDOM SUBSCRIBER INFORMATION BEFORE RETURNING A BOOK...: {}".format(id_number))
+        lib.subscriber_info(id_number)
+
+        print("\nTEST ON BOOKS RETURN")
+        lib.return_book_by_subscriber("1630236", "QA204")
+        lib.return_book_by_subscriber("1839456", "QA203")
+
+        print("\nTEST ON RANDOM RETURN...: {} - {}".format(id_number, quote))
+        lib.return_book_by_subscriber(id_number, quote)
+
+        print("\nSUBSCRIBER INFORMATION AFTER RETURNING A BOOK")
+        lib.subscriber_info("1630236")
+
+        print("\nRANDOM SUBSCRIBER INFORMATION AFTER RETURNING A BOOK...: {}".format(id_number))
+        lib.subscriber_info(id_number)
+
+        print("\nREMOVING A RANDOM SUBSCRIBER FROM THE LIBRARY:...{}".format(id_number))
+        lib.remove_subscriber_from_library(id_number)
+
+        id_number_non_existent = "102030"
+        print("\nREMOVING A NON EXISTENT SUBSCRIBER FROM THE LIBRARY:...{}".format(id_number_non_existent))
+        lib.remove_subscriber_from_library(id_number_non_existent)
+
+    except Exception as exception:
+        print(exception)
+        raise
     else:
-        print(datetime.datetime.now())
-        print(f'{message.upper()}')
-        print(tmp)
-        print(st)
-        print(final_dic)
-        print(s)
-
-        with fin:
-            with fout:
-                for line in fin:
-                    fout.write(line)
-
-        for num in gen:
-            print(num)
-
-        print(li)
-        print(s_tup)
-
-        print(sub1.__repr__())
-        print(sub1.__str__())
-
-        for i in range(Employee.nEmployees):
-            print(employees[i])
-
-        print(employees)
-
-        print('SORTING WITH attrgetter')
-        print(s_employees)
-
-        print('SORTING WITH employee_sort')
-        s_employees = sorted(employees, key=employee_sort)
-        print(s_employees)
-
-        print(dic_qa)
-
-        with open('fake_data.txt', 'w') as fout_data:
-            for num in range(100):
-                first = random.choices(first_names)
-                last = random.choices(last_names)
-                phone = f'{random.randint(100, 999)}-555-{random.randint(1000, 9999)}'
-                street_num = random.randint(100, 999)
-                street = random.choices(street_names)
-                city = random.choices(cities_names)
-                province = random.choices(provinces_names)
-                zip_code = random.randint(10000, 99999)
-                address = f'{street_num} {street[0]} Av., {city[0]} {province[0]} {zip_code}'
-                email = first[0].lower() + '.' + last[0].lower() + '@bogusemail.com'
-
-                fout_data.write(f'{first[0]} {last[0]} \n{phone}\n{address}\n{email}\n\n')
+        print("\nEND OF INTEGRATION TEST!!!\n")
 
     finally:
-        fout.close()
-        fin.close()
-        print('Program Ended Successfully!')
+        stop_time = time.time()
+        delta_time = stop_time - start_time
+        print("{} - {} = {}".format(stop_time, start_time, delta_time))
+        print("If you fail to plan, you are planning to fail! Benjamin Franklin")
+        print("To be a dancing master is a special thing. But to be a faceless man, that is something else entirely")
+        print("PROGRAM ENDED SUCCESSFULLY")
 
 
 if __name__ == '__main__':
